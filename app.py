@@ -1,53 +1,52 @@
 import streamlit as st
-import pandas as pd
-import matplotlib.pyplot as plt
-from FitechFileReader import get_reader
-
-st.title("FiTech Log Data Visualizer")
-
-uploaded_file = st.file_uploader("Upload your FiTech CSV file", type=["csv"])
-print(uploaded_file)
 
 
-if uploaded_file:
-    st.write(f"# File: {uploaded_file.name}")
-    reader = get_reader(uploaded_file.name)
-    df = reader.read()
+st.set_page_config(
+    page_title="Fitech Log Data Visualizer",
+    page_icon="",
+)
 
-    tabData, tabOverlay, tabSeperate = st.tabs(["Raw Data", "Overlay Plot", "Seperate Plot"], width="stretch")
+upload_page = st.Page(
+    page="views/Upload.py",
+    title="Upload CSV",
+    icon=":material/upload_file:",
+)
 
-    with tabData:
-        st.write("# Data Reader:")
-        st.write(reader.__class__)
-        st.write("### Preview of data:")
-        st.dataframe(df.head(20))
+data_page = st.Page(
+    page="views/Data.py",
+    title="Data Grid",
+    icon=":material/data_table:",
+)
 
-    with tabOverlay:
-        numeric_cols_Overlay = df.select_dtypes(include=['number']).columns.tolist()
-        selected_cols_Overlay = st.multiselect("Select fields to plot vs Time", options=numeric_cols_Overlay, default=['RPM', 'Fuel PW', 'MAP', 'AFR'], key="overlay")
+overlay_page = st.Page(
+    page="views/Overlay.py",
+    title="Overlay Charts",
+    icon=":material/analytics:",
+)
 
-        fig, ax = plt.subplots(figsize=(12, 6))
-        for col in selected_cols_Overlay:
-            ax.plot(df['Time'], df[col], label=col)
-        ax.set_xlabel("Time (s)")
-        ax.set_ylabel("Value")
-        ax.legend()
-        ax.grid(True)
-        st.pyplot(fig)
+singular_page = st.Page(
+    page="views/Singular.py",
+    title="Singular Charts",
+    icon=":material/multiline_chart:",
+)
 
-   
-    with tabSeperate:
-        numeric_cols_Seperate= df.select_dtypes(include=['number']).columns.tolist()
-        selected_cols_Seperate = st.multiselect("Select fields to plot vs Time", options=numeric_cols_Seperate, default=['RPM', 'Fuel PW', 'TPS', 'AFR'], key="seperate")
+terminology = st.Page(
+    page="views/Terminology.py",
+    title="Terminology",
+    icon=":material/contract:",
+)
 
-        fig, axs = plt.subplots(len(selected_cols_Seperate), 1, figsize=(12, 4 * len(selected_cols_Seperate)), sharex=True)
-        if len(selected_cols_Seperate) == 1:
-            axs = [axs]
-        for ax, col in zip(axs, selected_cols_Seperate):
-            ax.plot(df['Time'], df[col], label=col)
-            ax.set_ylabel(col)
-            ax.grid(True)
-            ax.legend()
-        axs[-1].set_xlabel("Time (s)")
-        plt.tight_layout()
-        st.pyplot(fig)
+pg = st.navigation(
+    {
+        "Files": [upload_page],
+        "Data Visualization": [data_page, overlay_page, singular_page],
+        "FAQ": [terminology]
+    }
+
+)
+
+# st.logo("assets/data-logo-2.png")
+st.sidebar.text("Edwin Soto")
+
+
+pg.run()
