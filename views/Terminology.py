@@ -2,7 +2,7 @@ import streamlit as st
 
 st.title("Terminology")
 
-column_tooltips = {
+automotive_terms = [
     'RPM', 'MAP', 'Coolant Temp', 'AFR', 'Target AFR', 'Lambda',
     'Lambda Target', 'AFR Trim %', 'AFR Learn %', 'Idle Fuel Learn',
     'Fans On', 'TPS', 'Fuel PW', 'Inject Duty%', 'MAP Fueled',
@@ -11,8 +11,9 @@ column_tooltips = {
     'WBO2 Temp', 'Warmup%', 'Startup%', 'Run Rev', 'Run State', 'Fault1',
     'Fault2', 'Fault3', 'Save Fault', 'Save Fault.1', 'Gear State',
     'vehicle speed'
-}
+]
 
-for col in column_tooltips:
+for col in automotive_terms:
     st.write(
-        f"**{col}**: {column_tooltips.get(col, 'No description available.')}")
+        f"## **{col}**: "
+    )

@@ -6,28 +6,22 @@ st.title("Overlay Plot Page")
 
 
 if 'uploaded_data' in st.session_state:
+    
     df = st.session_state['uploaded_data']
     numeric_cols_Overlay = df.select_dtypes(include=['number']).columns.tolist()
     selected_cols_Overlay = st.multiselect("Select fields to plot vs Time", options=numeric_cols_Overlay, default=['RPM', 'Fuel PW', 'MAP'], key="overlay")
     
-
-    
-
-    # Convert time to rounded string labels for slider options
     time_labels = [f"{t:.1f}" for t in df['Time']]
 
-    # Select time range using select_slider
     start_time_str, end_time_str = st.select_slider(
         "Select a range of time (s)",
         options=time_labels,
         value=(time_labels[0], time_labels[-1])
     )
 
-    # Convert back to float
     start_time = float(start_time_str)
     end_time = float(end_time_str)
 
-    # Filter data
     filtered_df = df[(df['Time'] >= start_time) & (df['Time'] <= end_time)]
 
     fig = go.Figure()

@@ -10,5 +10,3 @@ if 'uploaded_data' in st.session_state:
     st.dataframe(df)
 
     st.session_state['uploaded_data'] = df
-
-    print(df.cols)

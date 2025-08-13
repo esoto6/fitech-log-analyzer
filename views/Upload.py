@@ -13,7 +13,6 @@ if uploaded_file:
 
     st.write("## Data Reader:")
     st.write(reader.__class__)
-    # st.write(reader.__name__)
 
     st.session_state['reader'] = reader.__class__
     st.session_state['uploaded_data'] = df
