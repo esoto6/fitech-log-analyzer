@@ -2,8 +2,9 @@ from abc import ABC, abstractmethod
 import pandas as pd
 
 class FitechFileReader(ABC):
-    def __init__(self, file_path):
+    def __init__(self, file_path, file_obj):
         self.file_path = file_path
+        self.file_obj = file_obj
         self.sample_rate = 0.1
 
     @abstractmethod
@@ -15,7 +16,7 @@ class FitechFileReader(ABC):
 class BasicSensorReader(FitechFileReader):
 
     def read(self):
-        df = pd.read_csv(self.file_path)
+        df = pd.read_csv(self.file_obj)
 
         # Remove duplicate rows
         df = df[df['RPM'] != 'RPM']
@@ -36,16 +37,16 @@ class DashboardReader(FitechFileReader):
 
     def read(self):
 
-        df = pd.read_csv(self.file_path)
+        df = pd.read_csv(self.file_obj)
 
         return df
 
-def get_reader(file_path:str) -> FitechFileReader:
+def get_reader(file_path:str, file_obj) -> FitechFileReader:
     fileName = file_path.lower()
 
     if "basic sensor" in fileName:
-        return BasicSensorReader(file_path)
+        return BasicSensorReader(file_path, file_obj)
     elif "dashboard" in fileName:
-        return DashboardReader(FitechFileReader)
+        return DashboardReader(file_path, file_obj)
     else:
         raise ValueError(f"Unsupported log for Fitech: {file_path}")

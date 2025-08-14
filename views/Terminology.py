@@ -1,19 +1,47 @@
 import streamlit as st
+import pandas as pd
 
 st.title("Terminology")
 
-automotive_terms = [
-    'RPM', 'MAP', 'Coolant Temp', 'AFR', 'Target AFR', 'Lambda',
-    'Lambda Target', 'AFR Trim %', 'AFR Learn %', 'Idle Fuel Learn',
-    'Fans On', 'TPS', 'Fuel PW', 'Inject Duty%', 'MAP Fueled',
-    'Transient Fuel', 'Target RPM', 'IAC Steps', 'Idle PID', 'Fuel Pump',
-    'Fuel Flowrate', 'Air Temp', 'Cylinder Temp', 'Battery', 'BARO',
-    'WBO2 Temp', 'Warmup%', 'Startup%', 'Run Rev', 'Run State', 'Fault1',
-    'Fault2', 'Fault3', 'Save Fault', 'Save Fault.1', 'Gear State',
-    'vehicle speed'
-]
 
-for col in automotive_terms:
-    st.write(
-        f"## **{col}**: "
-    )
+
+
+@st.cache_data
+def load_efi_terms():
+    efi_terms = pd.read_csv("data/required/efi_terms.csv")
+    return efi_terms
+
+@st.cache_data
+def load_efi_params():
+    efi_params = pd.read_csv("data/required/efi_paramaters.csv")
+    return efi_params
+
+
+efi_terms = load_efi_terms()
+efi_params = load_efi_params()
+
+
+st.write("# EFI Basic Terms")
+for idx, row in efi_terms.iterrows():
+    if idx == 0:
+        pass
+    else:
+        st.write(f"### **{row['Term']}**")
+        st.write(f"{row['Definition']}")
+
+st.write("# EFI Parameters")
+for idx, row in efi_params.iterrows():
+    if idx == 0:
+        pass
+    else:
+        st.write(f"### **{row['Parameter']}**")
+        st.write(f"Meaning:")
+        st.write(f"{row['Meaning']}")
+        
+        st.write(f"Normal Range / Behavior")
+        st.write(f"{row['Normal Range / Behavior']}")
+
+        st.write("Notes:")
+        st.write(f"{row['Notes']}")
+
+

@@ -1,0 +1,22 @@
+Term,Definition
+EFI,Electronic Fuel Injection — a system that uses electronic controls to inject fuel directly into the engine's intake manifold or cylinders.
+ECU,"Engine Control Unit — the computer that controls EFI, adjusting fuel delivery, ignition timing, and other parameters."
+MAP Sensor,Manifold Absolute Pressure sensor — measures the pressure in the intake manifold for calculating air density.
+MAF Sensor,Mass Air Flow sensor — measures the amount of air entering the engine.
+TPS,Throttle Position Sensor — detects the angle of the throttle plate.
+O2 Sensor,Oxygen sensor — measures oxygen levels in the exhaust to adjust fuel mixture.
+Fuel Rail,A pipe that delivers pressurized fuel to the injectors.
+Fuel Injector,A nozzle that sprays fuel into the intake air stream or directly into the cylinder.
+IAC Valve,Idle Air Control valve — regulates airflow into the engine at idle.
+Fuel Pressure Regulator,Maintains consistent fuel pressure in the fuel rail.
+Coolant Temperature Sensor,Monitors engine coolant temperature for ECU adjustments.
+Knock Sensor,Detects engine knock (pinging) to allow ECU to adjust timing.
+Crankshaft Position Sensor,Monitors the position and rotational speed of the crankshaft.
+Camshaft Position Sensor,Monitors the position and speed of the camshaft.
+AFR,Air-Fuel Ratio — the ratio of air to fuel in the combustion mixture.
+Open Loop,EFI mode where the ECU ignores O2 sensor feedback and runs from preset maps.
+Closed Loop,EFI mode where the ECU uses O2 sensor feedback to fine-tune the mixture.
+Fuel Map,A programmed table in the ECU that determines fuel delivery based on sensor inputs.
+Rev Limiter,Prevents the engine from exceeding a certain RPM.
+Wideband O2 Sensor,More accurate oxygen sensor for tuning EFI systems.
+

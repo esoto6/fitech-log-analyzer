@@ -1,8 +1,8 @@
 [browser]
-gatherUsageStats = false
+gatherUsageStats=false
 
 [theme]
-base="dark"
+base=dark
 
 [client]
-showSidebarNavigation = true
+showSidebarNavigation=true

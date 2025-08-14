@@ -4,12 +4,13 @@ import streamlit as st
 st.set_page_config(
     page_title="Fitech Log Data Visualizer",
     page_icon="",
+    layout="wide"
 )
 
-upload_page = st.Page(
-    page="views/Upload.py",
-    title="Upload CSV",
-    icon=":material/upload_file:",
+home_page = st.Page(
+    page="views/Home.py",
+    title="Home",
+    icon=":material/home:",
 )
 
 data_page = st.Page(
@@ -38,7 +39,7 @@ terminology = st.Page(
 
 pg = st.navigation(
     {
-        "Files": [upload_page],
+        "Home":[home_page],
         "Data Visualization": [data_page, overlay_page, singular_page],
         "FAQ": [terminology]
     }
